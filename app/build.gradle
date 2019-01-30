@@ -16,6 +16,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    dataBinding {
+        enabled = true
+    }
     buildTypes {
         def STRING = "String"
 
@@ -44,6 +47,7 @@ dependencies {
     implementation libs.androidx.core
     implementation libs.androidx.constraintLayout
     implementation libs.androidx.lifecycle
+    implementation libs.androidx.recyclerView
 
     // networking
     implementation libs.networking.retrofit
