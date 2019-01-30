@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion versions.sdk
     defaultConfig {
@@ -15,7 +17,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        def STRING = "String"
+
+        debug {
+            buildConfigField STRING, "BASE_URL", "\"https://jsonplaceholder.typicode.com\""
+        }
+
         release {
+            buildConfigField STRING, "BASE_URL", "\"https://jsonplaceholder.typicode.com\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -24,13 +34,28 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // required dependencies
     implementation libs.dependencies.kotlinStd
+    implementation libs.dependencies.coroutinesCore
+    implementation libs.dependencies.coroutinesAndroid
+
+    // android x
     implementation libs.androidx.appCompat
     implementation libs.androidx.core
     implementation libs.androidx.constraintLayout
     implementation libs.androidx.lifecycle
+
+    // networking
     implementation libs.networking.retrofit
+    implementation libs.networking.retrofitCoroutines
     implementation libs.networking.gson
+
+    //dependency injection
+    implementation libs.di.dagger
+    implementation libs.di.daggerAndroid
+    implementation libs.di.daggerSupport
+    kapt libs.di.daggerCompiler
+    kapt libs.di.daggerProcessor
 
     testImplementation libs.test.junit
     androidTestImplementation libs.test.runner
