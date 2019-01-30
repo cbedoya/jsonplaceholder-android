@@ -1,0 +1,52 @@
+ext.libs = [:]
+ext.versions = [:]
+
+def versions = [
+        gradle                     : '3.3.0',
+        kotlin                     : '1.3.20',
+        sdk                        : 28,
+        minSdk                     : 21,
+        targetSdk                  : 28,
+        androidx : [
+                appcompat          : '1.1.0-alpha01',
+                core               : '1.1.0-alpha03',
+                constraintlayout   : '1.1.3',
+                lifecycle          : '2.1.0-alpha01',
+        ],
+        networking : [
+                retrofit           : '2.5.0',
+                gson               : '2.5.0',
+        ],
+        test : [
+                junit              : '4.12',
+                runner             : '1.1.1',
+                espresso           : '3.1.1',
+        ],
+]
+
+ext.versions = versions
+
+def libs = [
+        dependencies : [
+                gradle             : "com.android.tools.build:gradle:$versions.gradle",
+                kotlinGradle       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+                kotlinStd          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin",
+        ],
+        androidx : [
+                appCompat          : "androidx.appcompat:appcompat:$versions.androidx.appcompat",
+                core               : "androidx.core:core-ktx:$versions.androidx.core",
+                constraintLayout   : "androidx.constraintlayout:constraintlayout:$versions.androidx.constraintlayout",
+                lifecycle          : "androidx.lifecycle:lifecycle-extensions:$versions.androidx.lifecycle",
+        ],
+        networking : [
+                retrofit           : "com.squareup.retrofit2:retrofit:$versions.networking.retrofit",
+                gson               : "com.squareup.retrofit2:converter-gson:$versions.networking.retrofit",
+        ],
+        test : [
+                junit              : "junit:junit:$versions.test.junit",
+                runner             : "androidx.test:runner:$versions.test.runner",
+                espresso           : "androidx.test.espresso:espresso-core:$versions.test.espresso",
+        ]
+]
+
+ext.libs = libs
