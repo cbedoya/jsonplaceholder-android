@@ -1,9 +1,10 @@
-package com.cbedoya.jsonplaceholder
+package com.cbedoya.jsonplaceholder.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.cbedoya.jsonplaceholder.R
 
-class MainActivity : AppCompatActivity() {
+class PostListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
