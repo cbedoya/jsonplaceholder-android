@@ -37,9 +37,9 @@ class PostListActivity : AppCompatActivity() {
 
     }
 
-    private fun postItemClicked(post: PostViewModel) {
+    private fun postItemClicked(post: PostModel) {
         val intent = Intent(this, PostDetailActivity::class.java)
-        intent.putExtra("post", post)
+        intent.putExtra("post_id", post.id)
         startActivity(intent)
     }
 
