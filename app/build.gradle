@@ -4,18 +4,31 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.sdk
     defaultConfig {
         applicationId "com.cbedoya.jsonplaceholder"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    dataBinding {
+        enabled = true
+    }
     buildTypes {
+        def STRING = "String"
+
+        debug {
+            buildConfigField STRING, "BASE_URL", "\"https://jsonplaceholder.typicode.com\""
+        }
+
         release {
+            buildConfigField STRING, "BASE_URL", "\"https://jsonplaceholder.typicode.com\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -24,11 +37,31 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'androidx.core:core-ktx:1.1.0-alpha03'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    // required dependencies
+    implementation libs.dependencies.kotlinStd
+    implementation libs.dependencies.coroutinesCore
+    implementation libs.dependencies.coroutinesAndroid
+
+    // android x
+    implementation libs.androidx.appCompat
+    implementation libs.androidx.core
+    implementation libs.androidx.constraintLayout
+    implementation libs.androidx.lifecycle
+    implementation libs.androidx.recyclerView
+
+    // networking
+    implementation libs.networking.retrofit
+    implementation libs.networking.retrofitCoroutines
+    implementation libs.networking.gson
+
+    //dependency injection
+    implementation libs.di.dagger
+    implementation libs.di.daggerAndroid
+    implementation libs.di.daggerSupport
+    kapt libs.di.daggerCompiler
+    kapt libs.di.daggerProcessor
+
+    testImplementation libs.test.junit
+    androidTestImplementation libs.test.runner
+    androidTestImplementation libs.test.espresso
 }
