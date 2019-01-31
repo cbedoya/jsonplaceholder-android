@@ -1,5 +1,6 @@
 package com.cbedoya.jsonplaceholder.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -29,11 +30,17 @@ class PostListActivity : AppCompatActivity() {
     }
 
     private val dataObserver = Observer<List<PostModel>> { posts ->
-        postsRecyclerView.adapter = PostAdapter(posts)
+        postsRecyclerView.adapter = PostAdapter(posts) { postItemClicked(it) }
     }
 
     private val errorObserver = Observer<String> { error ->
 
+    }
+
+    private fun postItemClicked(post: PostViewModel) {
+        val intent = Intent(this, PostDetailActivity::class.java)
+        intent.putExtra("post", post)
+        startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
