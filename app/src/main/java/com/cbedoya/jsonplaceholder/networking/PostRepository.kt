@@ -11,17 +11,14 @@ class PostRepository @Inject constructor(val postService: PostService)  {
 
     fun allPosts(): LiveData<NetworkResult<List<PostModel>>> {
         return MutableLiveData<NetworkResult<List<PostModel>>>().apply {
-//            value = Running()
             postValue(Running())
             postService.allPosts().networkCall {
                 onSuccess = {
-//                    value = Success(it)
                     postValue(Success(it))
                     setPosts(it)
                 }
 
                 onFailure = {
-//                    value = Failure(it)
                     postValue(Failure(it))
                     setPosts(null)
                 }
